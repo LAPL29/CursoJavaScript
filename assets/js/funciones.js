@@ -1,23 +1,23 @@
-function saludar (nom){
+function saludar(nom) {
     nom = "luis";
-    
+
     console.log(`hola ${nom}`);
 }
-function saludar2 (nom){
+function saludar2(nom) {
     console.log(arguments);
-    console.log('Hola '+ nom);
+    console.log('Hola ' + nom);
 }
- 
+
 //Funcion anonima
-const saludar3 = function (nom){
+const saludar3 = function (nom) {
     console.log(`hola ${nom}`);
 }
 
-const saludarFlecha = () =>{
+console.log();
+const saludarFlecha = () => {
     console.log("Hola flecha");
-
 }
-const saludarFlecha2 = (nom) =>{
+const saludarFlecha2 = (nom) => {
     console.log(`hola ${nom}`);
 
 }

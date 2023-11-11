@@ -1,0 +1,183 @@
+JavaScript
+
+Añade comportamiento e interactividad a nuestros sitios web.
+
+¿Qué es JavaScript?
+Es el lenguaje de la web.
+• Añade interactividad a tus sitios web
+• Desarrollo Front End.
+• Desarrollo Back End.
+• Desarrollo de aplicaciones Móviles y escritorio.
+
+Reaccionar a eventos de usuario en nuestra página web.
+Validar formularios.
+Procesa Información.
+Mostras mapas y ubicaciones.
+
+Javascript corre sobre el DOM
+
+React, VueJS o Angular
+
+Otros usos
+
+Para el servidor 
+Node JS/ Expsress / Deno
+
+Para automatización 
+Gulp JS / Web Pack / ESLint
+
+Para manejar Dependencias
+NPM
+
+Apps Moviles o de escritorio
+React Native / Electron
+
+
+-----------------------
+Con var y let si se puede inicializar una variable sin valor. var disponible; let disponible;
+
+Con const no se pude inicializar una varible sin valor, y si ya le asignaste un valor a const ya no se puede volver asignar otro valor si no marcara error.
+
+const producto = "Monitor de 20\"";  // Se usa la barra invertida para poder ingresar las comillas dobles dentro de un String, las comillas se refieren a las pulgadas
+
+
+-- PREGUNTAS PARA TRABAJO
+Diferencias entre un foreach y map para crear un nuevo arreglo con una nueva variable
+
+foreach es para iterar y mostrar en consola y map para 
+si ya hay una lista usar foreach y si quiero crear un nuevo arreglo hay que usar map-
+
+Map te crear un nuevo arreglo y foreach no
+
+------
+
+
+this
+
+
+// this
+
+this hace referencia al objeto sobre el cual se esta mandando a llamar
+se debe colocar this para que pueda funcionar el codigo
+
+const reservacion = {
+    nombre : 'Luis',
+    apellidos : 'Apellidos',
+    total : 5000,
+    pagado : false,
+    informacion: function(){
+        console.log(`El cliente es ${this.nombre} reservo y su cantidad a pagar es: ${this.total}`);
+
+    }
+}
+
+console.log(reservacion.informacion());
+
+
+
+-----
+
+Fetch API
+
+igual que ajax te permite enviar inforamcion al servidor u obtener informacion de un servidor.
+
+Puedes obtener un archivo local o una respuesta de un servidor (Texto o JSON)
+
+Al igual que todas las API's Modernas de JavaScript utiliza Promises o tambien async / await
+
+Que es JSON ?
+
+-JSON es JavaScript Object Notation
+-Lenguaje de transportes de datos
+
+Un json puede ser creado en cualquier lenguaje y se puede consumir en javasrcipt por medio de fetch api y mostrarlo en tu sitio web.
+
+
+
+-- Eventos en javaScript
+
+// Eventos
+
+console.log(1);
+
+window.addEventListener("load",() => { // load espera a que el JS y los archivos que dependen del html esten listos el html el css etc
+    console.log(2);
+});
+
+// Es lo mismo de arriba
+window.onload = () =>{
+    console.log(3);
+};
+
+document.addEventListener('DOMContentLoaded', () => { // Solo espera a que descatue el html, pero no el css y las imagenes
+    console.log(4);
+
+});
+console.log(5);
+
+
+--- SASS  es css con superpoderes
+
+SASS = Syntatically Awesome StilyeSheet
+
+Se le considera un estanda de la industria
+
+Compatible con muchos framework css
+
+Ventajas
+- Mejor orden y estructura
+- Caracteristicas que no existenen css o con mejor soporte
+- Soporta codigo de css
+- Menos codigo ya que se utiliza algo llamado 'anidacion'
+
+Desventjas 
+- Una nueva sintaxis por aprender
+- Se debe compilar con una herramienta especial , no es nativo en el navegador
+- La anidacion puede causar problemas
+
+Sintaxis
+
+$color : #e1e1e1;
+$separacion: 5rem;
+
+Anidacion en SASS
+
+div
+	display: flex;
+	h1
+		margint-top: 10rem;
+	p	margin-top: 10rem;
+
+
+Extenciones en sass
+
+.sass con punto .header
+.scss con llaves .header{}
+
+SASS se compila
+
+No es soportado nativamente por el navegador, por lo tanto debera ser compilado a aun archivo .css
+
+Para compilarlo existen diferentes opciones siendo webpack y Gulp las mas populares.
+
+--- Gulp
+
+Que es gulp 
+
+gulp te permitira automatizar tareas que son repetitivas en desarrollo web tales como:
+-compilar sass y javaScript
+Crear imagenes mas ligeras o la version webp
+Minificar y mejorar tu codigo para produccion
+
+se requiere node js . npm
+
+gulp utiliza javaScript.
+
+
+gulp utiliza pipes
+
+un pipe en gulp es una accion que se ejecuta, una vez finalizada se ejecuta otra y otra ; el orden en que se ejecutan es definido por ese pipe
+
+
+
+

@@ -27,9 +27,7 @@ if( dia == '5'){
     // }
 }
 
-
 dia = 6;
-
 const dias = {
     0: 'domingo',
     1: 'lunes',
@@ -39,10 +37,7 @@ const dias = {
     5: 'viernes',
     6: 'sabado',
 };
-
-
 const dias2 = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
-
 
 console.log(dias[dia] || 'Dia no definido');
 console.log(dias2[dia] || 'Dia no definido');

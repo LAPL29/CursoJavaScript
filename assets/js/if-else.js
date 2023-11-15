@@ -40,4 +40,4 @@ const dias = {
 const dias2 = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
 
 console.log(dias[dia] || 'Dia no definido');
-console.log(dias2[dia] || 'Dia no definido');
+console.log(dias2[dia] || 'Dia no definido'); 

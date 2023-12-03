@@ -7,25 +7,39 @@
 
 // Patron modulo
 
-(() => { //funciones anonimas autoinvocadas h
+const miModulo = (() => { //funciones anonimas autoinvocadas h
     'use strict'
 
     let deck = [];
     const tipos = ['C', 'D', 'H', 'S'], especiales = ['A', 'J', 'Q', 'K'];
 
-    let puntosJugador = 0, puntosComputadora = 0;
+    // let puntosJugador = 0, puntosComputadora = 0;
+    let puntosJugadores = [];
 
     // Referencias del html
     const btnPedir = document.querySelector('#btnPedir'),
         btnDetener = document.querySelector('#btnDetener'),
         btnNuevo = document.querySelector('#btnNuevo'),
-        divCartasJugador = document.querySelector('#jugador-cartas'),
-        divCartasComputadora = document.querySelector('#computadora-cartas'),
+        divCartasJugadores = document.querySelectorAll('.divCartas'),
         puntosHTML = document.querySelectorAll('small');
 
     // Esta funcion inicializa el deck
-    const inicializarDeck = () => {
+    const inicializarDeck = (numJugadores = 2) => {
         deck = crearDeck();
+        puntosJugadores = [];
+
+        for (let index = 0; index < numJugadores; index++) {
+            puntosJugadores.push(0);
+        }
+
+        puntosHTML.forEach(Element => Element.innerText = 0);
+        divCartasJugadores.forEach(Element => Element.innerText = '');
+
+        btnPedir.disabled = false;
+        btnDetener.disabled = false;
+
+
+
     }
 
     //Esta funcion crea un nuevo deck
@@ -55,34 +69,33 @@
 
     const valorCarta = (carta) => {
         const valor = carta.substring(0, carta.length - 1);
-        return (isNaN(valor) ? (valor === 'A') ? 11 : 10 : valor * 1 );
-        // puntos = ( isNaN (valor) ?  puntos = ( valor === 'A' ) ? 11 : 10 :  puntos = valor * 1  );
-        // console.log(puntos);
+        return (isNaN(valor) ? (valor === 'A') ? 11 : 10 : valor * 1);
+
     }
 
-    // Turno Computadora
-    const turnoComputadora = (puntosMinimos) => {
-        do {
-            const carta = pedirCarta();
-            puntosComputadora += valorCarta(carta);
-            puntosHTML[1].innerText = puntosComputadora;
+    //Turno: 0 = primer y el ultimo = compu
+    const acumularPuntos = (carta, turno) => {
 
-            const imgCarta = document.createElement('img');
-            imgCarta.src = `assets/cartas/${carta}.png`;
-            imgCarta.classList.add('carta');
-            divCartasComputadora.append(imgCarta);
-            if (puntosMinimos > 21) {
-                break;
-            }
+        puntosJugadores[turno] += valorCarta(carta);
+        puntosHTML[turno].innerText = puntosJugadores[turno];
+        return puntosJugadores[turno];
 
-        } while ((puntosComputadora < puntosMinimos) && puntosMinimos < 21);
+    }
+    const crearCarta = (carta, turno) => {
+        const imgCarta = document.createElement('img');
+        imgCarta.src = `assets/cartas/${carta}.png`;
+        imgCarta.classList.add('carta');
+        divCartasJugadores[turno].append(imgCarta);
+    }
 
+    const determinarGanador = () => {
+        const [puntosMinimos, puntosComputadora] = puntosJugadores; //Desestructuracion
         setTimeout(() => {
-            if (puntosComputadora === puntosJugador) {
+            if (puntosComputadora === puntosMinimos) {
                 alert('Nadien gana')
             } else if (puntosMinimos > 21) {
                 alert('La computadora gana');
-            } else if (puntosComputadora > 21 || puntosComputadora < puntosJugador) {
+            } else if (puntosComputadora > 21 || puntosComputadora < puntosJugadores[0]) {
                 alert('El Jugador Gana');
             } else {
                 alert('La Computadora Gana');
@@ -91,16 +104,24 @@
         }, 100);
     }
 
+    // Turno Computadora
+    const turnoComputadora = (puntosMinimos) => {
+        let puntosComputadora = 0;
+        do {
+            const carta = pedirCarta();
+            puntosComputadora = acumularPuntos(carta, puntosJugadores.length - 1);
+            crearCarta(carta, puntosJugadores.length - 1);
+
+        } while ((puntosComputadora < puntosMinimos) && (puntosMinimos <= 21));
+        determinarGanador();
+    }
+
     // Eventos
     btnPedir.addEventListener('click', () => { //callback
         const carta = pedirCarta();
-        puntosJugador += valorCarta(carta);
-        puntosHTML[0].innerText = puntosJugador;
+        const puntosJugador = acumularPuntos(carta, 0);
 
-        const imgCarta = document.createElement('img');
-        imgCarta.src = `assets/cartas/${carta}.png`;
-        imgCarta.classList.add('carta');
-        divCartasJugador.append(imgCarta);
+        crearCarta(carta, 0)
 
         if (puntosJugador > 21) {
             console.warn('Lo siento mucho has perdido');
@@ -121,50 +142,16 @@
     btnDetener.addEventListener('click', () => { //callback
         btnPedir.disabled = true; //bloque el boton  
         btnDetener.disabled = true; //bloque el boton  
-        turnoComputadora(puntosJugador);
+        turnoComputadora(puntosJugadores[0]);
 
     });
 
     btnNuevo.addEventListener('click', () => { //callback
         inicializarDeck();
-        // deck = [];
-        // crearDeck();
-        btnPedir.disabled = false; //bloque el boton  
-        btnDetener.disabled = false; //bloque el boton
-
-        puntosJugador = 0;
-        puntosComputadora = 0;
-        puntosHTML[0].innerText = puntosJugador;
-        puntosHTML[1].innerText = puntosComputadora;
-
-        divCartasComputadora.innerHTML = '';
-        divCartasJugador.innerHTML = '';
-
     });
 
+    return {
+        nuevoJuego: inicializarDeck
+    };
+
 })();
-
-// const valorCarta = ( carta ) => {
-//     const valor = carta.substring(0, carta.length - 1);
-//     let puntos = 0;
-//     // console.log({valor});
-//     if( isNaN (valor) ){ // isnt a number
-//         puntos = (valor === 'A') ? 11 : 10;
-
-//         // console.log('No es un numero');
-//     }else{
-//         // console.log('Es un numero');
-//         puntos = valor * 1 ; // Para regresar en numeros.
-//     }
-//     console.log(puntos);
-// }
-
-// valorCarta('JD'); // SI ES GRIS ES UN STRING
-
-
-// pedirCarta();
-
-// for (let index = 0; index <= 100; index++) {
-//     pedirCarta();
-
-// }

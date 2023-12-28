@@ -1,7 +1,10 @@
 import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
-import { BreakingbadApp } from './src/breakingbad/breakingbad-app'
+// import { BreakingbadApp } from './src/breakingbad/breakingbad-app'
+
+import usersStore from './src/users/store/users-store'
+import { UsersApp } from './src/users/use-cases/users-app'
 
 
 
@@ -22,6 +25,6 @@ document.querySelector('#app').innerHTML = `
   </div>
 `
 const element = document.querySelector('.card');
-
-BreakingbadApp(element);
+// BreakingbadApp(element);
+UsersApp(element);
 

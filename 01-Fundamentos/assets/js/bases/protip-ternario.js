@@ -1,7 +1,7 @@
 const elMayor = (a,b) => ( a > b) ? a : b;  // si tiene un return se puede hacer en una linea de codigo
 
 const tieneMembresia = (miembro) => (miembro) ? '2 Dólares' : '10 Dólares';
-
+const tieneMembresia2 = (miembro) => miembro ? '2 Dólares' : '10 Dólares';
 const amigo = true;
 const amigosArr = [
     'Peter',
@@ -13,6 +13,8 @@ const amigosArr = [
 ];
 console.log(elMayor(10,15));
 console.log(tieneMembresia(true));
+console.log('-----')
+console.log(tieneMembresia2(true));
 console.log(amigosArr);
 
 const nota = 100; // a + a b,

@@ -42,6 +42,51 @@ saludarFlecha2('luis');
 
 
 
+const sumar = (num1, num2) => {
+    const resultado = num1 + num2;
+    return resultado;
+}
+
+const resta = (num1, num2) => {
+    const resultado = num1 - num2;
+    return resultado;
+}
+
+const resultadoFinal = () => {
+
+    const res = sumar(50, 100) - resta(10,5);
+    return res;
+}
+console.log(`El resultado final es: ${resultadoFinal()}`);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
